@@ -26,9 +26,10 @@ namespace Exercise2WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            //get random number
             List<clsRandom> random = new List<clsRandom>();
             HttpClient client = _api.Initial();
-            HttpResponseMessage rs = await client.GetAsync("api/RandomNumber");
+            HttpResponseMessage rs = await client.GetAsync("RandomNumber/GetRandomNumber");
 
             if (rs.IsSuccessStatusCode)
             {
@@ -38,8 +39,19 @@ namespace Exercise2WebApp.Controllers
 
             ViewData["randomNumber"] = random;
 
+            //get random word
+            List<clsRandomWord> random1 = new List<clsRandomWord>();
+            HttpResponseMessage rs1 = await client.GetAsync("RandomNumber/GetRandomWord");
+
+            if (rs.IsSuccessStatusCode)
+            {
+                var results1 = rs1.Content.ReadAsStringAsync().Result;
+                random1 = JsonConvert.DeserializeObject<List<clsRandomWord>>(results1);
+            }
+
+            ViewData["RandomWord"] = random1;
+
             return View();
         }
-
     }
 }

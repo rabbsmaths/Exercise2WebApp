@@ -6,6 +6,11 @@
     <h1 class="display-4">Welcome</h1>
     @foreach (var c in (List<clsRandom>)ViewData["randomNumber"])
     {
-      <p>Random Number Returned: @c.randomNum</p>
+        <p style="font-size:20px;">Random Number Returned: @c.randomNum</p>
+    }
+    <br/>
+    @foreach (var c in (List<clsRandomWord>)ViewData["RandomWord"])
+    {
+        <p style="font-size:20px;">Random word Returned: @c.word</p>
     }
 </div>
